@@ -28,7 +28,7 @@ class Program
 
         using var cts = new CancellationTokenSource();
 
-        _botClient.DeleteWebhook();
+        //_botClient.DeleteWebhook();
         _botClient.StartReceiving(UpdateHandler,ErrorHandler, _receiverOptions, cts.Token);
 
         var me = await _botClient.GetMe();
