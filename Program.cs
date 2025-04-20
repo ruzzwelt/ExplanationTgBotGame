@@ -13,9 +13,13 @@ class Program
 
     private static ReceiverOptions _receiverOptions;
 
+    private static ExplanationController GameObject;
+
     static async Task Main()
     {
-        _botClient = new TelegramBotClient(myConfig.tokenTgBot);
+        GameObject = new ExplanationController();
+
+        _botClient = new TelegramBotClient(MyConfig.TokenTgBot);
         _receiverOptions = new ReceiverOptions
         {
             AllowedUpdates = new[]
@@ -66,6 +70,15 @@ class Program
                                         "Выбери клавиатуру:\n" +
                                         "/inline\n" +
                                         "/reply\n");
+                                    return;
+                                }
+
+                                if (message.Text == "/new")
+                                {
+                                    await botClient.SendMessage(
+                                        chat.Id,
+                                        GameObject.StartNewGame()
+                                        );
                                     return;
                                 }
 
