@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Telegram.Bot.Types;
 
 namespace ExplanationTgBotGame
 {
     internal class ExplanationController
     {
+        private ExplanationModel Game;
 
-        public string StartNewGame()
+
+        public ExplanationController()
         {
-            ExplanationModel Game = new ExplanationModel();
-            return "Слово: " + Game.GetWord() + ". Буква: "+ Game.GetLetter();
+            this.Game = new ExplanationModel();
         }
 
+        public void StartNewGame()
+        {
+            //this.GetWord();
+        }
 
+        public string GetWord()
+        {
+            return "Слово: " + Game.GetWord() + ". Буква: " + Game.GetLetter() + ". Осталось слов: " + Game.Words.Count;
+        }
     }
 }

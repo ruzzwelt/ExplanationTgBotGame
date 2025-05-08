@@ -1,26 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
+
 
 namespace ExplanationTgBotGame
 {
     internal class ExplanationModel
     {
-        public string[] Words { get; set; }
+        public List<string> Words { get; set; }
         public char[] Letters { get; set; }
         public string Hints { get; set; }
         public ExplanationModel()
         {
-
+            this.GetWords();
+            this.GetLetters();
         }
 
         private void GetWords()
         {
-            this.Words = new string[]
+            
+
+            this.Words = new List<string>
             {
                 "Шаль", "Диплом", "Платок", "Палуба" , "Плоскогубцы", "Подросток", "Мухобойка", "Малина", "Чаевые", "Банка"
+                //"Шаль", "Диплом", "Платок"
             };
         }
 
@@ -28,26 +30,39 @@ namespace ExplanationTgBotGame
         {
             this.Letters = new char[]
             {
-                'Д', 'З', 'К', 'П', 'Н', 'О', 'В', 'С', 'Т', 'М', 'Л', 'Р'
+                //'Д', 'З', 'К', 'П', 'Н', 'О', 'В', 'С', 'Т', 'М', 'Л', 'Р'
+                'Д', 'З', 'К'
             };
         }
 
+        private int GetRandIndex(int maxLength)
+        {
+            Random random = new Random();
+            int index = random.Next(0, maxLength);
 
+            return index;
+        }
 
         public string GetWord() 
         {
-            this.GetWords();
+            if(this.Words.Count == 0)
+            {
+                this.GetWords();
+            }
 
-            Random random = new Random();
-            return this.Words[random.Next(0, this.Words.Length)];
+            int index = this.GetRandIndex(this.Words.Count);
+            string GotWord = this.Words[index];
+            this.Words.RemoveAt(index);
+            
+            return GotWord;
         }
-
+            
         public char GetLetter()
         {
-            this.GetLetters();
+            int index = this.GetRandIndex(this.Letters.Length);
+            char GotLetter = this.Letters[index];
 
-            Random random = new Random();
-            return this.Letters[random.Next(0, this.Letters.Length)];
+            return GotLetter;
         }
 
         public string GetHints()

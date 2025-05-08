@@ -10,9 +10,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 class Program
 {
     private static ITelegramBotClient _botClient;
-
     private static ReceiverOptions _receiverOptions;
-
     private static ExplanationController GameObject;
 
     static async Task Main()
@@ -60,7 +58,9 @@ class Program
 
                         var chat = message.Chat;
 
-                        switch(message.Type)
+                        //GameObject.StartNewGame();
+
+                        switch (message.Type)
                         {
                             case MessageType.Text:
                                 if (message.Text == "/start")
@@ -73,11 +73,11 @@ class Program
                                     return;
                                 }
 
-                                if (message.Text == "/new")
+                                if (message.Text == "/new" || message.Text == "Новое слово")
                                 {
                                     await botClient.SendMessage(
                                         chat.Id,
-                                        GameObject.StartNewGame()
+                                        GameObject.GetWord()
                                         );
                                     return;
                                 }
@@ -122,16 +122,16 @@ class Program
                                         {
                                         new KeyboardButton[]
                                         {
-                                            new KeyboardButton("Привет!"),
-                                            new KeyboardButton("Пока!"),
+                                            new KeyboardButton("Новое слово"),
+                                            new KeyboardButton("Передать ход"),
                                         },
                                         new KeyboardButton[]
                                         {
-                                            new KeyboardButton("Позвони мне!")
+                                            new KeyboardButton("Узнать счет")
                                         },
                                         new KeyboardButton[]
                                         {
-                                            new KeyboardButton("Напиши моему соседу!")
+                                            new KeyboardButton("Выход")
                                         }
                                         })
                                     {
