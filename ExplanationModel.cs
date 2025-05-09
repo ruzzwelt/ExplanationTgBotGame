@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using ExplanationTgBotGame.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace ExplanationTgBotGame
@@ -17,22 +19,12 @@ namespace ExplanationTgBotGame
 
         private void GetWords()
         {
-            
-
-            this.Words = new List<string>
-            {
-                "Шаль", "Диплом", "Платок", "Палуба" , "Плоскогубцы", "Подросток", "Мухобойка", "Малина", "Чаевые", "Банка"
-                //"Шаль", "Диплом", "Платок"
-            };
+            this.Words = WordsModel.GetList();
         }
 
         private void GetLetters()
         {
-            this.Letters = new char[]
-            {
-                //'Д', 'З', 'К', 'П', 'Н', 'О', 'В', 'С', 'Т', 'М', 'Л', 'Р'
-                'Д', 'З', 'К'
-            };
+            this.Letters = LettersModel.GetList();
         }
 
         private int GetRandIndex(int maxLength)

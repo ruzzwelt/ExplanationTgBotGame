@@ -4,12 +4,12 @@ namespace ExplanationTgBotGame
 {
     internal class ExplanationController
     {
-        private ExplanationModel Game;
+        private ExplanationModel GameModel;
 
 
         public ExplanationController()
         {
-            this.Game = new ExplanationModel();
+            this.GameModel = new ExplanationModel();
         }
 
         public void StartNewGame()
@@ -19,7 +19,7 @@ namespace ExplanationTgBotGame
 
         public string GetWord()
         {
-            return "Слово: " + Game.GetWord() + ". Буква: " + Game.GetLetter() + ". Осталось слов: " + Game.Words.Count;
+            return "Слово: " + GameModel.GetWord() + ". Буква: " + GameModel.GetLetter() + ". Осталось слов: " + GameModel.Words.Count;
         }
     }
 }
